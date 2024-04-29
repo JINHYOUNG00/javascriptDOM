@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+div {
+	width: 400px;
+	height: 380px;
+	background-color: yellow;
+}
+
+span {
+	display: inline-block;
+	width: 85px;
+	height: 30px;
+	padding: 2px;
+	margin: 2px;
+	background-color: cyan;
+}
+</style>
+</head>
+
+<body>
+	<input type="text" id="keyword">
+	<button id="findBtn">찾기</button>
+	<div id="show">
+		<span>Lorem</span> <span>ipsum</span> <span>dolor</span> <span>sit</span>
+		<span>amet</span> <span>consectetur</span> <span>adipisicing</span> <span>elit.</span>
+		<span>Accusantium</span> <span>dolores</span> <span>reprehende</span>
+		<span>eius</span> <span>distinctio,</span> <span>molestiae</span> <span>ratione</span>
+		<span>culpa</span> <span class="dd">laborum</span> <span>quia</span> <span>odio</span>
+		<span>deleniti</span> <span>non</span> <span>aliquam</span> <span>modi</span>
+		<span>nostrum</span> <span>quas!</span> <span>Ab</span> <span>atque</span>
+		<span>ullam</span> <span>in</span> <span>dolorum.</span>
+	</div>
+	<p id="remainCount">100초</p>
+
+
+	<script>
+		// findBtn의 클릭이벤트를 생성.
+		// input태그의 값을 확인.
+		// span 요소 모두를 가져온다.
+		// input값과  span의 값을 비교한다. 같으면 remove힌다.
+		// 입력값을 지워준다.
+		document.getElementById('findBtn').addEventListener('click',
+				function(e) {
+					let inputVal = document.getElementById('keyword').value;
+					document.querySelectorAll('span').forEach(function(item) {
+						if (item.innerText == inputVal) {
+							item.remove();
+						}
+					});
+
+				});
+/* 		
+		let sec = 10;
+		setInterval(function(){
+			sec--;
+			document.querySelector('#remainCount') //
+					.innerText = sec + "초";
+		}, 1000);
+		let max = 0;
+		let allSpan = document.querySelectorAll('span');
+		
+		
+		
+		if(sec == 0 && allSpan.length > 0) {
+			alert("dd");
+			sec == 100;
+		} else if(sec == 0 && allSpan.length == 0){
+			alert("성공");
+			sec == 100;
+		} */
+		
+	</script>
+</body>
+
+</html>
