@@ -23,6 +23,7 @@ const employees = `[{"id":1,"first_name":"Jarib","last_name":"Rispine","email":"
 {"id":19,"first_name":"Ed","last_name":"Salmons","email":"esalmonsi@imgur.com","gender":"Male","salary":4343},
 {"id":20,"first_name":"Isak","last_name":"Heintzsch","email":"iheintzschj@github.io","gender":"Male","salary":4411}]`;
 
+
 console.log(employees);
 const empList = JSON.parse(employees); // 문자열 -> 객체.
 console.log(empList);
