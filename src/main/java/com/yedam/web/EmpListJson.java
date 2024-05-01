@@ -31,11 +31,13 @@ public class EmpListJson extends HttpServlet {
 		String json = "[";
 		int i = 0;
 		for (Map<String, Object> map : list) {
-			json += "{\"empNo\":" + map.get("사원번호") //
+			json += "{"
+			+ "\"empNo\":" + map.get("사원번호") //
 			+ ",\"empName\":\"" + map.get("사원이름") //
 			+ "\",\"empPhone\":\"" + map.get("사원연락처") //
 			+ "\",\"email\":\"" + map.get("사원이메일")
-			+ "\" }";
+			+ "\" "
+			+ "}";
 			i++;
 			if((i) != list.size()) {
 				json += ",";
