@@ -15,7 +15,7 @@ public class DAO {
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection(url, "jsp", "jsp");
+			conn = DriverManager.getConnection(url, "jsp1", "jsp1");
 		} catch (Exception e) {
 			e.printStackTrace();
 			return;
