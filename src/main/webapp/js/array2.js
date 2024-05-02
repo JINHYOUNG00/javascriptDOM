@@ -23,8 +23,8 @@ genderAry.forEach(gender => {
 //함수(배열)을 이용한 table 만들기
 function makeList(ary = []) {		// 배열을 매개변수로 하는 makeList 함수 생성
 	//	let obj = { id: 1, first_name: '', last_name: '', email: '', gender: '', salary: '' }
-	let props = ['id', 'first_name', 'email', 'salary', 'gender'];
-
+	let props = ['id', 'first_name', 'email', 'salary'];
+	document.querySelector('#show tbody').innerHTML = null;
 
 	ary.forEach(emp => {
 
@@ -41,37 +41,10 @@ function makeList(ary = []) {		// 배열을 매개변수로 하는 makeList 함�
 }; // end of makeList();
 //makeList(empList);
 
-
-
-
-// select 토글 시 테이블 변경 
-
-let genderSelect = document.querySelector('#genderList');
-genderSelect.addEventListener('change', changeGender4);
-// filter() 사용시
-function changeGender1() {
-	document.querySelector('tbody').innerHTML = null;
-	let memberList = empList.filter((item) => {
-		return item.gender == genderSelect.options[genderSelect.selectedIndex].value;
-	});
-	return makeList(memberList);
-}
-// filter() 미사용시
-function changeGender2() {
-	document.querySelector('tbody').innerHTML = null;
-	let newList = [];
-	for (let i = 0; i < empList.length; i++) {
-		if (empList[i].gender == genderSelect.options[genderSelect.selectedIndex].value) {
-			newList.push(empList[i]);
-		}
-	}
-	makeList(newList);
-}
-
 // innerHtml을 이용한 table 만들기
 function makeList2(ary = []) {
 	let template = "";
-	let props = ['id', 'first_name', 'email', 'salary', 'gender'];
+	let props = ['id', 'first_name', 'email', 'salary'];
 	ary.forEach((emp) => {
 		template += `<tr>`
 		props.forEach((val) => {
@@ -84,28 +57,34 @@ function makeList2(ary = []) {
 }
 makeList2(empList);
 
-// innerHtml 사용 - filter() 미사용
-function changeGender3() {
+
+
+
+// select 토글 시 테이블 변경 
+
+let genderSelect = document.querySelector('#genderList');
+genderSelect.addEventListener('change', changeGender2);
+// filter() 사용시
+function changeGender1() {
+//	document.querySelector('tbody').innerHTML = null;
+	let memberList = empList.filter((item) => {
+		return item.gender == genderSelect.options[genderSelect.selectedIndex].value;
+	});
+	makeList2(memberList);
+}
+// filter() 미사용시
+function changeGender2() {
+//	document.querySelector('tbody').innerHTML = null;
 	let newList = [];
-	// 해당 조건을 만족하는 배열을 새로 만듦
 	for (let i = 0; i < empList.length; i++) {
 		if (empList[i].gender == genderSelect.options[genderSelect.selectedIndex].value) {
 			newList.push(empList[i]);
 		}
 	}
-	makeList2(newList);
+	makeList(newList);
 }
 
-// innerHtml 사용 filter() 사용 makeList2 메소드만 만들어놓으면 똑같음
-// 기존과 차이는 기존엔 데이터가 누적되면서 쌓여서 tbody부분을 비워줘야한다면 
-// innerHtml을 썼을경우 기존의 테이블을 교체하는 방식인듯하다. 
-function changeGender4() {
-	// 해당 조건을 만족하는 배열을 새로 만듦
-	let newList = empList.filter((val) => {
-		return val.gender == genderSelect.options[genderSelect.selectedIndex].value;
-	});
-	makeList2(newList);
-}
+
 
 
 
