@@ -36,7 +36,7 @@ public class EmpJson extends HttpServlet{
 			emp.setEmail(req.getParameter("email"));
 			emp.setSalary(Integer.parseInt(req.getParameter("salary")));
 
-	
+
 			if (edao.insertEmp(emp)) {
 				// {"retCode" : "OK"}
 				map.put("retCode", "OK");

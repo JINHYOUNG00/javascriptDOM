@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Fetch함수</title>
+<script type="text/javascript" src="../js/empService.js"></script>
+<script type="text/javascript" src="../js/empFetchService.js"></script>
+</head>
+<body>
+	<!-- myinfo/empFetch.html -->
+	<div id="register">
+		<table border="1">
+			<tr>
+				<th>이름</th>
+				<td><input type="text" id="ename"></td>
+			</tr>
+			<tr>
+				<th>연락처</th>
+				<td><input type="tel" id="ephone" ></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><input type="email" id="email" ></td>
+			</tr>
+			<tr>
+				<th>입사일자</th>
+				<td><input type="date" id="edate" ></td>
+			</tr>
+			<tr>
+				<th>급여</th>
+				<td><input type="number" id="esal" ></td>
+			</tr>
+			<tr align="center">
+				<td colspan="2"><button id="addBtn">등록</button></td>
+			</tr>
+		</table>
+	</div>
+	<div id="show">
+		<table border="2">
+			<thead>
+				<tr>
+					<th>사번</th>
+					<th>이름</th>
+					<th>이메일</th>
+					<th>급여</th>
+					<th>삭제.</th>
+				</tr>			
+			</thead>
+			<tbody id="elist">
+			
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

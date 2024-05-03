@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>공공api활용</title>
+<style>
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+</style>
+</head>
+<body>
+	<!-- myinfo/dataportal -->
+	<div id="show">
+		<table border="2">
+			<tbody id="list">
+			
+			</tbody>
+		</table>
+	</div>
+	<div class="pagination">
+	    <a href="#">&laquo;</a>
+	    <a href="#">1</a>
+	    <a class="active" href="#">2</a>
+	    <a href="#">3</a>
+	    <a href="#">4</a>
+	    <a href="#">5</a>
+	    <a href="#">6</a>
+	    <a href="#">&raquo;</a>
+	</div>
+	<script type="text/javascript" src="../js/portal.js"></script>
+</body>
+</html>
