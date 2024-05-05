@@ -31,9 +31,9 @@ function addRow() {
 		job: 'add',
 		name: document.querySelector('#ename').value,
 		phone: document.querySelector('#ephone').value,
-		salary: document.querySelector('#email').value,
+		mail: document.querySelector('#email').value,
 		hire: document.querySelector('#edate').value,
-		mail: document.querySelector('#esal').value
+		salary: document.querySelector('#esal').value
 	}
 	svc.addEmp(paramObj,
 		data => {
@@ -44,23 +44,23 @@ function addRow() {
 		},
 		err => console.log(err)
 	);
-	fetch('../empsave.json', {
-		method: 'post',
-		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		body: param
-	})
-		.then(result => result.json())
-		.then(data => {
-			if (data.retCode == 'OK') {
-				let tr = makeRow(data.retVal);
-				document.querySelector('#elist').appendChild(tr);
-			} else if (data.retCode == 'NG') {
-				alert('처리중 에러 발생');
-			} else {
-				alert('에러 코드 확인');
-			}
-		})
-		.catch(err => console.log(err));
+	//	fetch('../empsave.json', {
+	//		method: 'post',
+	//		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+	//		body: param
+	//	})
+	//		.then(result => result.json())
+	//		.then(data => {
+	//			if (data.retCode == 'OK') {
+	//				let tr = makeRow(data.retVal);
+	//				document.querySelector('#elist').appendChild(tr);
+	//			} else if (data.retCode == 'NG') {
+	//				alert('처리중 에러 발생');
+	//			} else {
+	//				alert('에러 코드 확인');
+	//			}
+	//		})
+	//		.catch(err => console.log(err));
 }
 function makeRow(emp = {}) {		// 배열을 매개변수로 하는 makeList 함수 생성
 	let props = ['empNo', 'empName', 'email', 'salary'];
@@ -128,19 +128,13 @@ function updateRow() {
 // 삭제 이벤트
 function deleteRow() {
 	let tr = this.parentElement.parentElement;
-	
+
 	let paramObj = {
 		job: 'delete',
 		empNo: this.parentElement.parentElement.dataset.no,
 	}
 	svc.deleteEmp(paramObj,
-		
-	);
-	fetch(`../empsave.json?job=delete&empNo=${delNo}`)
-		.then(function(result) {
-			return result.json(); // 리턴을 해줘야 다음 처리에서 사용가능
-		})
-		.then(function(data) {
+		(data) => {
 			if (data.retCode == 'OK') {
 				tr.remove();
 			} else if (data.retCode == 'NG') {
@@ -148,8 +142,24 @@ function deleteRow() {
 			} else {
 				alert('에러 코드 확인');
 			}
-		})
-		.catch(function(err) {
-			console.log(err);
-		})
+		},
+		err => console.log(err));
+
+
+//	fetch(`../empsave.json?job=delete&empNo=${delNo}`)
+//		.then(function(result) {
+//			return result.json(); // 리턴을 해줘야 다음 처리에서 사용가능
+//		})
+//		.then(function(data) {
+//			if (data.retCode == 'OK') {
+//				tr.remove();
+//			} else if (data.retCode == 'NG') {
+//				alert('처리중 에러 발생');
+//			} else {
+//				alert('에러 코드 확인');
+//			}
+//		})
+//		.catch(function(err) {
+//
+//		})
 }
