@@ -22,7 +22,26 @@ function initForm() {
 	document.querySelector('#addBtn')
 		.addEventListener('click', addRow);
 
+	// th checkBox 체크시 전체 체크박스 체크 이벤트 	
+	document.querySelector('thead input[type="checkbox"]')
+		.addEventListener('change', function(e) {
+			//thead => tbody
+			let inp = this;
+			//		console.log(inp); //
+			document.querySelectorAll('tbody input[type="checkbox"]')
+				.forEach((item) => { //화살표 함수
+					item.checked = this.checked;
+					//							console.log(inp.checked);
+					//console.log(item.checked);
+				});
+		});
+
+	document.querySelector('#delBtn')
+		.addEventListener('click', selectDeleteRow)
+
 } // end of initForm
+
+
 
 function addRow() {
 	// 사원이름(ename), 연락처(phone), 급여(salary), 입사일자(hire), 이메일(email)
@@ -75,12 +94,20 @@ function makeRow(emp = {}) {		// 배열을 매개변수로 하는 makeList 함�
 	}) // end of profs.forEach();
 
 
-	let td = document.createElement('td');
+	let delBtnTd = document.createElement('td');
 	let btn = document.createElement('button');
 	btn.innerHTML = "삭제"
 	btn.addEventListener('click', deleteRow);
-	td.appendChild(btn);
-	tr.appendChild(td);
+	delBtnTd.appendChild(btn);
+	tr.appendChild(delBtnTd);
+
+	// tr 생성시 chkbox 생성
+	let delChkTd = document.createElement('td');
+	let chk = document.createElement('input');
+	chk.setAttribute('type', 'checkbox');
+	delChkTd.appendChild(chk);
+	tr.appendChild(delChkTd);
+
 	return tr;
 
 }; // end of makeRow();
@@ -125,13 +152,40 @@ function updateRow() {
 	);
 }
 
+function selectDeleteRow() {
+	let paramObj = {
+		job: 'delete',
+		empNo: 0
+	}
+
+	document.querySelectorAll('tbody input[type="checkbox"]')
+		.forEach(item => {
+			if (item.checked == true) {
+				paramObj.empNo = item.parentElement.parentElement.dataset.no
+				let tr = item.parentElement.parentElement;
+				console.log(paramObj.empNo);
+				svc.deleteEmp(paramObj,
+					(data) => {
+						if (data.retCode == 'OK') {
+							tr.remove();
+						} else if (data.retCode == 'NG') {
+							alert('처리중 에러 발생');
+						} else {
+							alert('에러 코드 확인');
+						}
+					},
+					err => console.log(err));
+			}
+		})
+}
+
 // 삭제 이벤트
 function deleteRow() {
 	let tr = this.parentElement.parentElement;
 
 	let paramObj = {
 		job: 'delete',
-		empNo: this.parentElement.parentElement.dataset.no,
+		empNo: this.parentElement.parentElement.dataset.no
 	}
 	svc.deleteEmp(paramObj,
 		(data) => {
@@ -146,20 +200,20 @@ function deleteRow() {
 		err => console.log(err));
 
 
-//	fetch(`../empsave.json?job=delete&empNo=${delNo}`)
-//		.then(function(result) {
-//			return result.json(); // 리턴을 해줘야 다음 처리에서 사용가능
-//		})
-//		.then(function(data) {
-//			if (data.retCode == 'OK') {
-//				tr.remove();
-//			} else if (data.retCode == 'NG') {
-//				alert('처리중 에러 발생');
-//			} else {
-//				alert('에러 코드 확인');
-//			}
-//		})
-//		.catch(function(err) {
-//
-//		})
+	//	fetch(`../empsave.json?job=delete&empNo=${delNo}`)
+	//		.then(function(result) {
+	//			return result.json(); // 리턴을 해줘야 다음 처리에서 사용가능
+	//		})
+	//		.then(function(data) {
+	//			if (data.retCode == 'OK') {
+	//				tr.remove();
+	//			} else if (data.retCode == 'NG') {
+	//				alert('처리중 에러 발생');
+	//			} else {
+	//				alert('에러 코드 확인');
+	//			}
+	//		})
+	//		.catch(function(err) {
+	//
+	//		})
 }
