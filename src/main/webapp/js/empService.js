@@ -15,7 +15,7 @@ const svc = {
 		fetch('../empsave.json', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
-			body: `job=add&name=${param.name}&phone=${param.phone}&email=${param.mail}&salary=${param.salary}&hire=${param.hire}`
+			body: `job=${param.job}&name=${param.name}&phone=${param.phone}&email=${param.mail}&salary=${param.salary}&hire=${param.hire}`
 		})
 			.then(result => result.json())
 			.then(successCall)
@@ -27,7 +27,7 @@ const svc = {
 		fetch('../empsave.json', {
 			method: 'post',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
-			body: `job=edit&empNo=${param.empNo}&salary=${param.salary}&email=${param.mail}`
+			body: `job=${param.job}&empNo=${param.empNo}&salary=${param.salary}&email=${param.mail}`
 		})
 			.then(result => result.json())
 			.then(successCall)

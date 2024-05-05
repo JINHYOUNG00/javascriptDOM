@@ -31,7 +31,7 @@ function initForm() {
 			document.querySelectorAll('tbody input[type="checkbox"]')
 				.forEach((item) => { //화살표 함수
 					item.checked = this.checked;
-					//							console.log(inp.checked);
+					//console.log(inp.checked);
 					//console.log(item.checked);
 				});
 		});
@@ -152,6 +152,7 @@ function updateRow() {
 	);
 }
 
+// 여러건 선택 삭제 이벤트
 function selectDeleteRow() {
 	let paramObj = {
 		job: 'delete',
@@ -163,7 +164,7 @@ function selectDeleteRow() {
 			if (item.checked == true) {
 				paramObj.empNo = item.parentElement.parentElement.dataset.no
 				let tr = item.parentElement.parentElement;
-				console.log(paramObj.empNo);
+				//console.log(paramObj.empNo);
 				svc.deleteEmp(paramObj,
 					(data) => {
 						if (data.retCode == 'OK') {
@@ -176,8 +177,8 @@ function selectDeleteRow() {
 					},
 					err => console.log(err));
 			}
-		})
-}
+		});
+};
 
 // 삭제 이벤트
 function deleteRow() {

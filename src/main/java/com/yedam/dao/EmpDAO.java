@@ -105,17 +105,17 @@ public class EmpDAO extends DAO {
 		String sql = "insert into emp(emp_no, emp_name, emp_phone, email, salary) "
 				+ "		values (?,?,?,?,?)";
 		String seqSql = "select emp_no_seq.nextval from dual";
-		int seq = 0;
+//		int seq = 0;
 		try {
 			psmt = conn.prepareStatement(seqSql);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
-				seq = rs.getInt(1);
+				int seq = rs.getInt(1);
 				emp.setEmpNo(seq); // 매개변수 evo에 empNo 저장
 			}
 			
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, seq);
+			psmt.setInt(1, emp.getEmpNo());
 			psmt.setString(2, emp.getEmpName());
 			psmt.setString(3, emp.getEmpPhone());
 			psmt.setString(4, emp.getEmail());
