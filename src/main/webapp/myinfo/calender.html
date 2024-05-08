@@ -8,5 +8,16 @@
 <body>
 	<!-- myinfo/calender.html -->
 	<div id="show"></div>
+	<script type="text/javascript">
+	let now = new Date();
+// 	console.log(`년도: ${now.getFullYear()}`);
+// 	console.log(`월: ${now.getMonth()}`);
+	let month = 5;
+	let last = new Date(2024, month, 0);
+	let first = new Date(2024, month+2, 1).getDay();
+	console.log(`월 : ${month}`)
+	console.log(`${last.getDate()}`);
+	console.log(`${first}`);
+	</script>
 </body>
 </html>

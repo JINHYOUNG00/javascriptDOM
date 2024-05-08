@@ -178,4 +178,81 @@ public class EmpDAO extends DAO {
 		}
 		return false;
 	}
+	
+	// 부서별 인원 현황. {부서: 인원 현황}
+	public Map<String, Integer> getCntperDept(){
+		conn();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		String sql = "select d.department_name,\r\n"
+				+ "            count(1) as cnt\r\n"
+				+ "from hr.employees e\r\n"
+				+ "join hr.departments d\r\n"
+				+ "on e.department_id = d.department_id\r\n"
+				+ "group by d.department_name";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				map.put(rs.getString("department_name"), rs.getInt("cnt"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			disCon();
+		}
+		return map;
+	}
+	
+	public List<List<String>> empList2() {
+
+		conn();
+		List<List<String>> list1 = new ArrayList<>();
+		try {
+			psmt = conn.prepareStatement("select employee_id, first_name, email, phone_number, salary\r\n"
+					+ "from employees");
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				List<String> list2 = new ArrayList<>();
+				list2.add(rs.getString("employee_id"));
+				list2.add(rs.getString("first_name"));
+				list2.add(rs.getString("phone_number"));
+				list2.add(rs.getString("email"));
+				list2.add(rs.getString("salary"));
+				list1.add(list2);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			disCon();
+		}
+
+		return list1;
+	}
+	
+	// jsp.employees 테이블 사원번호값을 찾아서 한건 삭제 
+	public boolean deleteEmp2(int empId) {
+		conn();
+		String sql = "delete employees where employee_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, empId);
+			int r = psmt.executeUpdate();
+
+			if (r > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			disCon();
+		}
+		return false;
+	}
+	
 }

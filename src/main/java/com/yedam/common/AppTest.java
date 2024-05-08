@@ -1,6 +1,8 @@
 package com.yedam.common;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.yedam.dao.EmpDAO;
 import com.yedam.vo.EmpVO;
@@ -36,6 +38,13 @@ public class AppTest {
 //			System.out.println("예외발생");
 //		}
 		
+		
+		Map<String, Integer> cntperDept = edao.getCntperDept();
+		Set<String> keySet = cntperDept.keySet();
+		
+		for (String key : keySet) {
+			System.out.println(key +  ":" + cntperDept.get(key));
+		}
 		
 		
 		

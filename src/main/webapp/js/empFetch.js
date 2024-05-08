@@ -51,8 +51,8 @@ function addRow() {
 			}
 		})
 		.catch(err => console.log(err));
+		
 }
-
 
 // 화살표 함수 사용 리팩토링 이전 initForm 함수
 //function initForm() {

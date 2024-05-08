@@ -38,16 +38,18 @@ const svc = {
 
 			return acc; // <tr> <th></th> * 7 </tr>
 		}, document.createElement('tr'));  // <tr></tr>
-		
+
 		let thd = document.createElement('thead');
 		thd.appendChild(tr);
 		return thd
 	},
-	makeBody: function() {
+	makeBody: function(month = 4) {
+//		let last = new Date(2024, month, 0);
+//		console.log(`${last.getDate()}`);
 		let tbd = document.createElement('tbody');
 		let tr = document.createElement('tr');
 
-		let spaces = 1;
+		let spaces = 1; // getFirstDate() => 1일의 위치를 반환
 		for (let i = 0; i < spaces; i++) {
 			let td = document.createElement('td');
 			td.innerText = " ";
@@ -57,7 +59,8 @@ const svc = {
 		//		let td = document.createElement('td');
 		//		td.innerText = " ";
 		//		tr.appendChild(td);
-		for (let d = 1; d <= 30; d++) {
+
+		for (let d = 1; d <= 30; d++) { // getLastDate(month) => 월의 마지막날을 반환
 			let td = document.createElement('td');
 			td.innerHTML = d;
 			tr.appendChild(td);
